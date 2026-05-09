@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0F172A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Schaeffler Catalogue</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--dark:#0F172A;--red:#BE000F;--bg:#fff;--txt:#1a1a1a;--sec:#666;--border:#e0e0e0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5;color:var(--txt);display:flex;flex-direction:column;overflow:hidden;-webkit-user-select:none;user-select:none}
+header{background:var(--dark);color:#fff;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--red);z-index:100;flex-shrink:0}
+h1{font-size:16px;font-weight:700;margin:0}
+.menu{background:0;border:0;color:#fff;font-size:18px;cursor:pointer;padding:4px;display:none}
+.search{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:6px 10px;color:#fff;font-size:12px;width:100px;transition:width.2s}
+.search::placeholder{color:rgba(255,255,255,.5)}
+.search:focus{outline:0;width:140px;border-color:var(--red)}
+.container{display:flex;flex:1;overflow:hidden}
+.sidebar{background:var(--dark);width:240px;overflow-y:auto;border-right:1px solid rgba(255,255,255,.1);flex-shrink:0;transition:transform.3s}
+.sidebar.hide{transform:translateX(-100%)}
+.item{padding:10px 14px;color:rgba(255,255,255,.7);cursor:pointer;border-left:3px solid transparent;font-size:12px;font-weight:500;transition:all.1s}
+.item:hover{background:rgba(255,255,255,.08);color:#fff}
+.item.on{background:rgba(190,0,15,.15);color:var(--red);border-left-color:var(--red)}
+.content{flex:1;overflow-y:auto;padding:14px}
+.title{font-size:16px;font-weight:700;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;transition:all.15s;cursor:pointer}
+.card:hover{box-shadow:0 2px 8px rgba(190,0,15,.12);border-color:var(--red)}
+.name{font-size:12px;font-weight:700;margin-bottom:6px}
+.spec{font-size:11px;color:var(--sec);line-height:1.3;margin-bottom:8px}
+.btn{width:100%;padding:8px;background:var(--red);color:#fff;border:0;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer}
+.btn:active{background:#9a000c}
+@media(max-width:768px){.menu{display:block}.grid{grid-template-columns:1fr}.search{width:80px}.search:focus{width:120px}}
+footer{padding:8px 12px;font-size:10px;color:var(--sec);text-align:center;border-top:1px solid var(--border);flex-shrink:0}
+</style>
+</head>
+<body>
+<header>
+<div><h1>Schaeffler Catalogue</h1></div>
+<input class="search" id="search" placeholder="Search...">
+<button class="menu" id="menu">☰</button>
+</header>
+<div class="container">
+<div class="sidebar" id="sidebar"></div>
+<div class="content"><div class="title" id="title">Rolling Bearings</div><div class="grid" id="grid"></div></div>
+</div>
+<footer>GodavariTech | Schaeffler India | Offline-Ready</footer>
+<script>
+const data={
+"rolling-bearings":{"title":"Rolling Bearings FAG/INA","products":[
+{name:"Deep Groove Ball",spec:"FAG 60xx/62xx/63xx",cat:"High-speed, low-friction"},
+{name:"Angular Contact",spec:"35° contact angle",cat:"Radial & axial loads"},
+{name:"Four-Point Contact",spec:"QJ X-life, split ring",cat:"Compressors, pumps, automotive"},
+{name:"Self-Aligning Ball",spec:"INA 120xx/130xx",cat:"Misalignment compensation"},
+{name:"Thin-Section",spec:"Compact design",cat:"Space-constrained applications"},
+{name:"Cylindrical Roller",spec:"NJ/NU series",cat:"High radial load machinery"}
+]},
+"cam-followers":{"title":"INA Cam Followers & Track Rollers","products":[
+{name:"KR Series Cam",spec:"Stud/yoke variants",cat:"High-speed, low-friction"},
+{name:"NUTR Track Rollers",spec:"Needle roller system",cat:"Linear motion automation"},
+{name:"NART Series",spec:"Heavy-duty guidance",cat:"Precision positioning"}
+]},
+"arcanol":{"title":"Arcanol Rolling Bearing Greases","products":[
+{name:"ARCANOL MULTI2",spec:"400g, 1kg, 5kg, 25kg",cat:"Multi-purpose, wide range"},
+{name:"ARCANOL LOAD",spec:"Heavy-duty formula",cat:"High-load extended life"},
+{name:"ARCANOL TEMP",spec:"High-temperature",cat:"Up to 150°C continuous"},
+{name:"Refill Cartridge",spec:"CONCEPT-compatible",cat:"100% quality tested"}
+]},
+"heaters":{"title":"FAG Induction Heaters","products":[
+{name:"MFT Mobile Heater",spec:"Medium-frequency",cat:"60% cost savings, on-site"},
+{name:"HEATER Table",spec:"Touchscreen control",cat:"50% time & energy savings"},
+{name:"HEATER Floor",spec:"Heavy-duty industrial",cat:"Large components, safety"}
+]},
+"concept":{"title":"CONCEPT Automatic Lubricators","products":[
+{name:"CONCEPT 1",spec:"Compact variant",cat:"Single-point application"},
+{name:"CONCEPT 2",spec:"Digital display",cat:"Flexible scheduling"},
+{name:"CONCEPT 4",spec:"4-outlet multi",cat:"Coordinated timing"},
+{name:"CONCEPT 8",spec:"Industrial scale",cat:"Up to 8 points"}
+]},
+"optime":{"title":"OPTIME Condition Monitoring","products":[
+{name:"SmartCheck Sensor",spec:"ISO 18436 certified",cat:"Vibration monitoring"},
+{name:"ProLink Gateway",spec:"3-module hub",cat:"Cloud integration"},
+{name:"Premesy Controller",spec:"4-channel monitor",cat:"Local processing"},
+{name:"OPTIME Smart Lube",spec:"Integrated sensor",cat:"Predictive greasing"}
+]},
+"cbm":{"title":"Portable CBM","products":[
+{name:"Portable CBM Unit",spec:"Handheld analyzer",cat:"Field diagnostics"},
+{name:"Vibration Sensor Kit",spec:"Multi-mount options",cat:"Wireless/wired"}
+]},
+"alignment":{"title":"LASER-EQUILIGN Alignment","products":[
+{name:"EQUILIGN Compact",spec:"Portable system",cat:"Fast alignment"},
+{name:"EQUILIGN Industrial",spec:"High-precision",cat:"Large equipment"}
+]},
+"mounting":{"title":"Mounting & Dismounting Tools","products":[
+{name:"Hydraulic Puller",spec:"Multiple sizes",cat:"Safe removal"},
+{name:"Mounting Sleeve",spec:"Standard/custom",cat:"Uniform pressure"},
+{name:"Installation Kit",spec:"Complete toolset",cat:"Guides, adapters"}
+]},
+"linear":{"title":"Linear Motion Systems","products":[
+{name:"Recirculating Ball",spec:"KWVE-W series",cat:"Smooth linear motion"},
+{name:"Ball Monorail",spec:"Double-rail precision",cat:"High accuracy automation"},
+{name:"Roller Monorail",spec:"Heavy-load systems",cat:"Large equipment"}
+]},
+"spindle":{"title":"M-Series Spindle Bearings","products":[
+{name:"M-Series Steel",spec:"100Cr6 cost-effective",cat:"Milling, turning, grinding"},
+{name:"HCM-Series",spec:"Ceramic balls",cat:"High-speed performance"},
+{name:"VCM-Series",spec:"Vacrodur rings",cat:"Extreme robustness"}
+]}
+};
+
+const sidebar=document.getElementById("sidebar"),grid=document.getElementById("grid"),title=document.getElementById("title"),search=document.getElementById("search"),menu=document.getElementById("menu");
+let current="rolling-bearings";
+
+Object.keys(data).forEach(k=>{
+const div=document.createElement("div");
+div.className="item"+(k==="rolling-bearings"?" on":"");
+div.textContent=data[k].title;
+div.onclick=()=>show(k);
+sidebar.appendChild(div);
+});
+
+function show(k){
+current=k;
+const d=data[k];
+title.textContent=d.title;
+grid.innerHTML=d.products.map(p=>`<div class="card"><div class="name">${p.name}</div><div class="spec">${p.spec}<br>${p.cat}</div><button class="btn" onclick="open('${p.name}')">View</button></div>`).join("");
+document.querySelectorAll(".item").forEach(el=>el.classList.remove("on"));
+event.target.classList.add("on");
+search.value="";
+sidebar.classList.add("hide");
+}
+
+search.addEventListener("input",()=>{
+const q=search.value.toLowerCase();
+if(!q){document.querySelectorAll(".card").forEach(c=>c.style.display="");return}
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display=c.textContent.toLowerCase().includes(q)?"":"none";
+});
+});
+
+menu.onclick=()=>sidebar.classList.toggle("hide");
+document.addEventListener("click",e=>{if(!e.target.closest(".sidebar")&&e.target!==menu)sidebar.classList.add("hide")});
+
+show("rolling-bearings");
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
