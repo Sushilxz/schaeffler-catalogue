@@ -1,52 +1,18 @@
 {
-  "name": "GodavariTech Schaeffler Product Catalogue",
-  "short_name": "Schaeffler Catalogue",
-  "description": "11 product families with full specs, offline-capable field reference for GodavariTech sales engineers",
-  "start_url": "/index.html",
+  "name": "Schaeffler Catalogue",
+  "short_name": "Catalogue",
+  "description": "Product reference for GodavariTech sales",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
   "theme_color": "#0F172A",
   "background_color": "#ffffff",
-  "screenshots": [
+  "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230F172A' width='192' height='192'/><text x='50%' y='50%' font-size='48' fill='%23BE000F' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>SC</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230F172A' width='192' height='192'/><text x='50%' y='50%' font-size='80' fill='%23BE000F' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>S</text></svg>",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
-    },
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230F172A' width='512' height='512'/><text x='50%' y='50%' font-size='200' fill='%23BE000F' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>SC</text></svg>",
-      "sizes": "512x512",
-      "type": "image/svg+xml"
-    }
-  ],
-  "icons": [
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230F172A' width='192' height='192'/><text x='50%' y='50%' font-size='48' fill='%23BE000F' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>SC</text></svg>",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230F172A' width='192' height='192'/><text x='50%' y='50%' font-size='48' fill='%23BE000F' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>SC</text></svg>",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    },
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230F172A' width='512' height='512'/><text x='50%' y='50%' font-size='200' fill='%23BE000F' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>SC</text></svg>",
-      "sizes": "512x512",
-      "type": "image/svg+xml"
-    }
-  ],
-  "categories": ["productivity", "utilities"],
-  "screenshots": [
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23f5f5f5' width='540' height='720'/><rect fill='%230F172A' width='540' height='60'/><text x='270' y='35' font-size='18' fill='white' text-anchor='middle' font-weight='bold'>Schaeffler Catalogue</text></svg>",
-      "sizes": "540x720",
-      "type": "image/svg+xml",
-      "form_factor": "narrow"
     }
   ]
 }
